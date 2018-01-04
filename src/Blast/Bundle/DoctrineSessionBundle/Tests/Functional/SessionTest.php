@@ -47,6 +47,7 @@ class SessionTest extends KernelTestCase
     protected function setUp()
     {
         static::bootKernel();
+
         /*
          * SELECT table_name FROM information_schema.tables where TABLE_SCHEMA='travis'
          *  select * from sf_session

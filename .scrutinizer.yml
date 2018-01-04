@@ -3,8 +3,14 @@ filter:
         - 'vendor/*'
         - 'bin/*'
         - '*.min.js'
+        - 'src/Tests/*'
+        - 'src/Skeleton/*'
+        - 'src/*/*/*/Tests'
+        - 'src/*/*/*/Resources'
 checks:
-    php: true
+    php:
+        code_rating: true
+        duplication: true
     javascript: true
 coding_style:
     php:

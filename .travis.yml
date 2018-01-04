@@ -7,14 +7,19 @@ php:
 
 services:
   - postgresql
+  - elasticsearch
 
 sudo: required
 
 cache:
   pip: true
   directories:
+    - $HOME/bin/
     - $HOME/.composer/cache/files
-
+    - $HOME/.npm/
+    - node_modules
+    
+    
 env:
   global:
     - PATH="$HOME/.local/bin:$PATH"
@@ -35,19 +40,18 @@ matrix:
       env: TARGET=docs
     - php: '7.1'
       env: TARGET=lint
+    - php: '7.1'
+      env: TARGET=ant
   allow_failures:
     - php: nightly
     - env: SYMFONY_DEPRECATIONS_HELPER=0
-    - env: SYMFONY=dev-master@dev
-    - env: SONATA_CORE=dev-master@dev
-    - env: SONATA_BLOCK=dev-master@dev
 
 before_install:
     - ln -s .env.travis .env # Enable env
     - if [[ -x ${SCRIPTS_FOLDER}/check_relevant_${TARGET}.sh && "$TRAVIS_PULL_REQUEST" != "false" ]]; then export RELEVANT=$(${SCRIPTS_FOLDER}/check_relevant_${TARGET}.sh); fi;
     - if [[ ! -z ${RELEVANT} ]];then exit 0; fi;
     - if [ -x ${SCRIPTS_FOLDER}/before_install_${TARGET}.sh ]; then ${SCRIPTS_FOLDER}/before_install_${TARGET}.sh; fi;
-    - if [ -x ${SCRIPTS_FOLDER}/create_travis_database_${TARGET}.sh ]; then ${SCRIPTS_FOLDER}/create_travis_database_${TARGET}.sh; fi;
+    - if [ -x ${SCRIPTS_FOLDER}/create_database_${TARGET}.sh ]; then ${SCRIPTS_FOLDER}/create_database_${TARGET}.sh; fi;
 
 install:
     - if [ -x ${SCRIPTS_FOLDER}/install_${TARGET}.sh ]; then ${SCRIPTS_FOLDER}/install_${TARGET}.sh; fi;

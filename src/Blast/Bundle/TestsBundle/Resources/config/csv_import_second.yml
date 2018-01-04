@@ -1,0 +1,13 @@
+csv_mapping:
+    Blast\Bundle\TestsBundle\Entity\TstSecond:
+        delete: true
+        filename: second.csv
+        fields:
+            'nom':        name
+            'code':       code
+            'nom simple': simple
+        associations:            
+            simple:
+              entity: Blast\Bundle\TestsBundle\Entity\TstSimple
+              target: name
+            

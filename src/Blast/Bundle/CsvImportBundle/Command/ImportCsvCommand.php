@@ -62,20 +62,20 @@ class ImportCsvCommand extends ContainerAwareCommand
             ->setDescription('Import data from CSV files into Blast.')
             ->setDefinition(
                 new InputDefinition([
-                new InputOption(
-                    'mapping',
-                    'm',
-                    InputOption::VALUE_REQUIRED,
-                    'The mapping files.',
-                    'src/Resources/config/csv_import.yml'
-                ),
-                new InputOption(
-                    'dir',
-                    'd',
-                    InputOption::VALUE_REQUIRED,
-                    'The path directory containing the CSV files.',
-                    'src/Resources/data'
-                ),
+                    new InputOption(
+                        'mapping',
+                        'm',
+                        InputOption::VALUE_REQUIRED,
+                        'The mapping files.',
+                        'src/Resources/config/csv_import.yml'
+                    ),
+                    new InputOption(
+                        'dir',
+                        'd',
+                        InputOption::VALUE_REQUIRED,
+                        'The path directory containing the CSV files.',
+                        'src/Resources/data'
+                    ),
                 ])
             )
 
@@ -120,9 +120,11 @@ EOT
      */
     protected function importData($entityClass, OutputInterface $output)
     {
+        $batchSize = 10000;
         $output->write("Importing <info>$entityClass</info>");
         $csv = $this->getCsvFilePath($entityClass);
         $output->write(' (' . basename($csv) . ')...');
+        /** @todo: use $batchSize to load file part by part */
         $data = file_get_contents($csv);
 
         /* @todo: allow import from other format (or not) */
@@ -146,16 +148,21 @@ EOT
             $this->em->persist($object);
 
             // Hum Lol
-            if ($k % 1000 == 0) {
+            if ($k % $batchSize == 0) {
                 $this->em->flush();
+                // http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/batch-processing.html
+                // Warning ! Should not do a clear as it detach attached foreign entity (so they are not found on persist)
+                // $this->em->clear();
             }
         }
         $this->em->flush();
+        $this->em->clear();
         $output->writeln('DONE (' . basename($csv) . ')...');
     }
 
     protected function postDeserialize($entityClass, $object, OutputInterface $output)
     {
+        /* @todo: move this to deserialise in normalizer */
         if (array_key_exists('generators', $this->mapping[$entityClass])) {
             foreach (keys($this->mapping[$entityClass]['generators']) as $field) {
                 $generator = $this->getContainer()->get($this->mapping[$entityClass]['generators'][$field]);
@@ -177,9 +184,7 @@ EOT
         }
         if ($doDelete) {
             $output->writeln(sprintf('Delete from %s', $entityClass));
-            $em = $this->getContainer()->get('doctrine')->getEntityManager();
-
-            $em->createQuery('DELETE FROM ' . $entityClass)->execute();
+            $this->em->createQuery('DELETE FROM ' . $entityClass)->execute();
             //$em->createQuery('DELETE FROM :entityClass')->execute(['entityClass', $entityClass]);
         }
     }

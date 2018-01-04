@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:blast-project/SearchBundle.git
+	branch = wip-platform
+	commit = ad56607b502e3d254d80e6b0a81a1b569caf0cbc
+	method = merge
+	cmdver = 0.4.0
+	parent = c2ff801dcb77e71c91d6424ace1001b47726eb70

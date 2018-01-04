@@ -1,22 +1,16 @@
 imports:
+    - { resource: "@PlatformBundle/Resources/config/admin.yml" }
 
-    - { resource: vendor/stof.yml }
-    - { resource: vendor/sil.yml }
-    - { resource: vendor/sonata.yml }
-    - { resource: vendor/sylius.yml }
-    - { resource: vendor/lexik.yml }
-    - { resource: vendor/fos.yml }
-    - { resource: vendor/doctrine.yml }
-    - { resource: vendor/stfalcon.yml }
+    # Vendors
 
-    # BLAST Bundles
-
-    - { resource: "@BlastCoreBundle/Resources/config/config.yml" }
-    # - { resource: "@BlastBaseEntitiesBundle/Resources/config/app/config.yml" }# overriden in app/config/vendors/blast.yml
-    # - { resource: "@BlastResourceBundle/Resources/config/app/config.yml" }    # overriden in app/config/vendors/blast.yml
-    - { resource: "@BlastUtilsBundle/Resources/config/app/config.yml" }
-    # TODO : should add a load on config too (or not)
-    - { resource: "@BlastCsvImportBundle/Resources/config/services.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/stof.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/sil.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/sonata.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/sylius.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/lexik.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/fos.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/doctrine.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/stfalcon.yml" }
 
     # SIL Bundles
 
@@ -48,10 +42,12 @@ imports:
     - { resource: "@SilManufacturingBundle/Resources/config/app/config.yml" }
     - { resource: "@SilManufacturingBundle/Resources/config/services.yml" }
 
-    - { resource: admin.yml }
+    # Blast
 
-    # Vendors
-    - { resource: vendor/blast/base_entities.yml }
-    - { resource: vendor/blast/menu.yml }
-    - { resource: vendor/blast/resource.yml }
-    - { resource: vendor/blast/utils.yml }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/csv_import.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/dashboard.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/search.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/base_entities.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/menu.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/resource.yml" }
+    - { resource: "@PlatformBundle/Resources/config/vendor/blast/utils.yml" }

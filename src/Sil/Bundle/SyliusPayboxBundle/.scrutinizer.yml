@@ -3,8 +3,11 @@ filter:
         - 'vendor/*'
         - 'bin/*'
         - '*.min.js'
+        - 'Tests/*'
 checks:
-    php: true
+    php:
+        code_rating: true
+        duplication: true
     javascript: true
 coding_style:
     php:

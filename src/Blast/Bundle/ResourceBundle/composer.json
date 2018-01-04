@@ -4,7 +4,8 @@
     "description": "",
     "require": {
         "php": "^7.1",
-        "symfony/symfony": "^3.3",
+        "doctrine/orm": "2.5.*",
+        "symfony/symfony": "3.3.*",
         "blast-project/resource": "self.version"
     },
     "require-dev": {

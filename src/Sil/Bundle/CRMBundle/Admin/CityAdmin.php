@@ -45,21 +45,12 @@ class CityAdmin extends CoreAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-//            ->add('zip', 'doctrine_orm_callback', array(
-//                'callback' => function($queryBuilder, $alias, $field, $value) {
-//                    if (empty($value['value'])) {
-//                        return;
-//                    }
-//                    $queryBuilder->andWhere($alias . '.city LIKE :city');
-//                    $queryBuilder->setParameter('city', '%Paris%');
-//                    dump($queryBuilder->getQuery()->getSql());
-//                    return true;
-//                },
-//                'field_type' => 'text'
-//            ))
             ->add('zip')
             ->add('city')
             ->add('country_code')
+            ->add('insee_code')
+            // ->add('lat')
+            // ->add('lng')
         ;
     }
 
@@ -72,7 +63,11 @@ class CityAdmin extends CoreAdmin
             ->add('zip')
             ->add('city')
             ->add('country_code')
+            ->add('insee_code')
+            // ->add('lat')
+            // ->add('lng')
         ;
+        parent::configureListFields($listMapper);
     }
 
     /**
@@ -84,6 +79,9 @@ class CityAdmin extends CoreAdmin
             ->add('zip')
             ->add('city')
             ->add('country_code')
+            ->add('insee_code')
+            ->add('lat')
+            ->add('lng')
         ;
     }
 
@@ -96,6 +94,14 @@ class CityAdmin extends CoreAdmin
             ->add('zip')
             ->add('city')
             ->add('country_code')
+            ->add('insee_code')
+            ->add('lat')
+            ->add('lng')
+            ->add('map', null, [
+                'mapped'   => false,
+                'template' => 'SilCRMBundle:CRUD:show_field_map.html.twig',
+                'label'    => false,
+            ])
         ;
     }
 }

@@ -6,6 +6,7 @@
         "php": "^7.1",
         "symfony/symfony": "3.3.*",
         "blast-project/resource-bundle": "self.version",
+        "blast-project/resource": "self.version",
         "blast-project/core-bundle": "self.version",
         "blast-project/base-entities-bundle": "self.version",
         "blast-project/outer-extension-bundle": "self.version",
@@ -14,7 +15,7 @@
         "stfalcon/tinymce-bundle": ">=2.1",
         "html2text/html2text": ">=4.0",
         "symfony/swiftmailer-bundle": "^3.0",
-        "friendsofsymfony/jsrouting-bundle": ">=1.6"
+        "friendsofsymfony/jsrouting-bundle": "^2.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "3.3.*",

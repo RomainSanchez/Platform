@@ -1,0 +1,7 @@
+csv_mapping:
+    Blast\Bundle\TestsBundle\Entity\TstSimple:
+        delete: true
+        filename: simple.csv
+        fields:
+            'nom':         name
+            'code':        code
