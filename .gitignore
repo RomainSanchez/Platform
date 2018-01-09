@@ -62,3 +62,4 @@ src/Tests/_support/_generated/*
 !src/Tests/_support/_generated/.gitkeep
 
 .env
+.DS_Store
