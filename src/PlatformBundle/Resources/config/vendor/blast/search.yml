@@ -5,8 +5,9 @@ fos_elastica:
             port: "%blast_search.elastic_search.port%"
     indexes:
         global:
+            use_alias: true
+            index_name: "%blast_search.global_index_alias%_%kernel.environment%"
             finder: ~
-            index_name: "%blast_search.global_index_name%"
             settings:
                 index.max_result_window: 100000
             types:
@@ -66,7 +67,7 @@ fos_elastica:
                         city: ~
                     persistence:
                         driver: orm
-                        model: "%sil_crm.entity.city.class%"
+                        model: "%sil.model.crm_city.class%"
                         listener:
                             defer: true
                         finder: ~
@@ -81,7 +82,7 @@ blast_search:
             class: "%sil.model.crm_organism.class%"
             template: PlatformBundle:Search/Results:Organism.html.twig
         -
-            class: "%sil_crm.entity.city.class%"
+            class: "%sil.model.crm_city.class%"
             template: SilCRMBundle:Search/Results:City.html.twig
 
 knp_paginator:

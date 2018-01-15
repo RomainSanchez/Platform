@@ -2,7 +2,7 @@
 services:
     sil_crm.admin.address:
         class: Sil\Bundle\CRMBundle\Admin\AddressAdmin
-        arguments: [~, '%sil_crm.entity.address.class%', BlastCoreBundle:CRUD]
+        arguments: [~, '%sil.model.crm_address.class%', BlastCoreBundle:CRUD]
         tags:
             -
                 name: sonata.admin
@@ -10,5 +10,3 @@ services:
                 group: admin
                 label: sil.crm.menu_label.address
                 label_translator_strategy: blast.resource.sonata.label_strategy.prefix
-        calls:
-            - [ setTemplate, [edit, SilCRMBundle:AddressAdmin:edit.html.twig]]

@@ -1,2 +1,1 @@
 parameters:
-    sil_media.entity.file.class: Sil\Bundle\MediaBundle\Entity\File

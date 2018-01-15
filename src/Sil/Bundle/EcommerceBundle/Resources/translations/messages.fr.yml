@@ -336,6 +336,7 @@ sil:
                     name: Nom
                     taxcategory: ~
                     updated_at: Mis à jour le
+                    taxcategory: Catégorie
             show:
                 label:
                     code: Code
@@ -480,6 +481,23 @@ sil:
 
 
         product_variant:
+            filter:
+                label:
+                    code: Code
+                    product.code: Code produit
+                    translations.name: Nom
+            list:
+                label:
+                    available: Disponible
+                    code: Code
+                    enabled: Actif
+                    on_hand: En stock
+                    on_hold: Réservé
+                    option_values: Options
+                    price: Prix
+                    product: Produit
+                    tracked: Suivi
+                    translations.name: Nom
             form:
                 label:
                     channel_pricings: Prix par canal de vente
@@ -546,6 +564,12 @@ sil:
                     product: Produit
                     shipping_address: Addresse de livraison
                     shipping_method: Méthode de livraison
+                help:
+                    confirm_cancel: Voulez-vous vraiment annuler cette commande ?
+                    confirm_validate: Voulez-vous vraiment valider cette commande ?
+                    confirm_confirmOrder: Voulez-vous vraiment confirmer cette commande ?
+                    quantity_in_grams: Quantité (g)
+                    order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier
             list:
                 label:
                     action: Action
@@ -982,6 +1006,7 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+form_tab_images: Images
 form_group_shipping_and_payment_methods: Paiements et Livraisons
 
 show_group_actions: Actions

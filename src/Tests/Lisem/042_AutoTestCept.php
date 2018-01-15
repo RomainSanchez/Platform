@@ -9,13 +9,23 @@
  */
 
 // @group route
+use Codeception\Util\HttpCode;
 
 $I = new WebGuy($scenario);
-$I->wantTo('Test All Route');
+$I->amGoingTo('Test All Route');
+
+$allCode = array();
+$allLink = array();
+
+function dumpvar($var)
+{
+    fwrite(STDERR, print_r($var, true));
+    fwrite(STDERR, print_r("\n", true));
+}
 
 function doLogin($webGuy)
 {
-    $webGuy->wantTo('Login');
+    $webGuy->amGoingTo('Login');
     //## LOGIN ####
     $webGuy->amOnPage('/lisem/login');
     $webGuy->fillField("//input[@id='_username']", 'lisem@lisem.eu');
@@ -23,19 +33,32 @@ function doLogin($webGuy)
     $webGuy->click("//button[@type='submit']");
 }
 
-function stdCheck($webGuy)
+function stdCheck($webGuy, $url, &$allCode)
 {
-    $webGuy->waitForText('Libre', 10); // secs
-    $webGuy->dontSee('Stack Trace'); /* :) :) we hope so */
+    $allCode[$url] = 'OK';
+
+    $webGuy->cantSee('Stack Trace'); /* :) :) we hope so */
+    $webGuy->cantSeeInSource('<div class="exceptionContainer">'); /* :) :) we hope so too */
+
+    // if ($webGuy->isPhpBrowser()) {
+    // $webGuy->canseeResponseCodeIs(HttpCode::OK);
+    $allCode[$url] = $webGuy->getStatusCode();
+    // }
+    //   dumpvar($allCode);
+
+    // if ($webGuy->isWebDriver()) {
+    // $webGuy->waitForText('Libre', 10); // secs
+    // }
+
+    //
     // $webGuy->seeResponseCodeIs(HttpCode::OK); /* does not work with selenium */
-    $webGuy->dontSeeInSource('<div class="exceptionContainer">'); /* :) :) we hope so too */
 }
 
-function checkPage($webGuy, $urlPage, &$linkList)
+function checkPage($webGuy, $urlPage, &$linkList, &$allCode)
 {
-    $webGuy->wantTo('Test Route: ' . $urlPage);
+    $webGuy->amGoingTo('Test Route: ' . $urlPage);
     $webGuy->amOnPage($urlPage);
-    stdCheck($webGuy);
+    stdCheck($webGuy, $urlPage, $allCode);
 
     $allLink = $webGuy->grabMultiple('a', 'href');
     $allShow = preg_grep('/show$/', $allLink);
@@ -61,7 +84,6 @@ function checkPage($webGuy, $urlPage, &$linkList)
     //return $linkList;
 }
 
-$allLink = array();
 doLogin($I);
 
 //## Get Some Symfony Service ####
@@ -73,6 +95,8 @@ $curRouter = $I->grabServiceFromContainer('router');
 //     $curCatalogue = $curCatalogue->getFallbackCatalogue();
 // }
 // $curMessage = $curCatalogue->all('messages');
+
+$rtlim = 10;
 
 foreach ($curRouter->getRouteCollection() as $curRoute) {
     $routePath = $curRoute->getPath();
@@ -108,30 +132,36 @@ foreach ($curRouter->getRouteCollection() as $curRoute) {
                 }
                 if (isset($curMapper)) {
                     //$curLabel = $curAdmin->getLabelTranslatorStrategy()->getLabel('', '', '');
-                    checkPage($I, $routePath, $allLink);
+                    checkPage($I, $routePath, $allLink, $allCode);
                     //                    array_push($allLink, checkPage($I, $routePath));
 
-                // $libKeys = preg_grep('/^' . $curLabel . '/', array_keys($curMessage));
+                    // $libKeys = preg_grep('/^' . $curLabel . '/', array_keys($curMessage));
 
-                // foreach ($libKeys as $curKeys) {
-                //     $I->cantSeeInSource($curKeys); /* We should not see label key */
-                // }
+                    // foreach ($libKeys as $curKeys) {
+                    //     $I->cantSeeInSource($curKeys); /* We should not see label key */
+                    // }
+                    //     if ($rtlim-- == 0) {
+                    //   break;
+                    //}
                 }
             }
         }
     }
 }
 
-$uniqLink = array_unique($allLink);
+// $uniqLink = array_unique($allLink);
 
-foreach ($uniqLink as $curLink) {
-    //dump($curLink);
-    $I->wantTo('Test Link: ' . $curLink);
-    $I->amOnUrl($curLink);
-    stdCheck($I);
+// foreach ($uniqLink as $curLink) {
+//     //dump($curLink);
+//     $I->amGoingTo('Test Link: ' . $curLink);
+//     $I->amOnUrl($curLink);
+//     stdCheck($I, $curLink, $allCode);
 
-    $allLink = $I->grabMultiple('a', 'href');
-    //    $allAnchor =  preg_grep('/^#/', $allLink);
+//     $allLink = $I->grabMultiple('a', 'href');
+//     //    $allAnchor =  preg_grep('/^#/', $allLink);
 
-    //dump($allAnchor);
-}
+//     //dump($allAnchor);
+// }
+
+dumpvar($allCode);
+$I->amGoingTo('The End Flush STDERR ');
