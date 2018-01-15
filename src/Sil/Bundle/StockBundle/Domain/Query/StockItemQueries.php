@@ -113,11 +113,15 @@ class StockItemQueries implements StockItemQueriesInterface
      */
     protected function computeQtyForUnits(Uom $uom, array $stockUnits): UomQty
     {
+        $result = new UomQty($uom, 0);
         $unitQties = array_map(function ($q) {
-            return $q->getQty()->getValue();
+            return $q->getQty();
         }, $stockUnits);
-        $sumQty = array_sum($unitQties);
 
-        return new UomQty($uom, $sumQty);
+        $result = array_reduce($unitQties, function ($carry, $item) {
+            return $carry->increasedBy($item);
+        }, $result);
+
+        return $result;
     }
 }

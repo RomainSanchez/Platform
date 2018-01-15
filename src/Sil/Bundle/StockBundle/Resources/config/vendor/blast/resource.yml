@@ -20,12 +20,12 @@ blast_resource:
       classes:
         model:                  Sil\Bundle\StockBundle\Domain\Entity\OutputStrategy
 
-    sil.stock_item:
-      classes:
-        model:                  Sil\Bundle\StockBundle\Domain\Entity\StockItem
-        repository:             Sil\Bundle\StockBundle\Doctrine\ORM\StockItemRepository
-        interfaces:
-          - Sil\Bundle\StockBundle\Domain\Entity\StockItemInterface
+    # sil.stock_item:
+    #   classes:
+    #     model:                  Sil\Bundle\StockBundle\Domain\Entity\StockItem
+    #     repository:             Sil\Bundle\StockBundle\Doctrine\ORM\StockItemRepository
+    #     interfaces:
+    #       - Sil\Bundle\StockBundle\Domain\Entity\StockItemInterface
 
     sil.stock_unit:
       classes:
@@ -37,12 +37,12 @@ blast_resource:
         model:                  Sil\Bundle\StockBundle\Domain\Entity\Warehouse
         repository:             Sil\Bundle\StockBundle\Doctrine\ORM\WarehouseRepository
 
-    sil.stock_partner:
-      classes:
-        model:                  Sil\Bundle\StockBundle\Domain\Entity\Partner
-        repository:             Sil\Bundle\StockBundle\Doctrine\ORM\PartnerRepository
-        interfaces:
-          - Sil\Bundle\StockBundle\Domain\Entity\PartnerInterface
+    # sil.stock_partner:
+    #   classes:
+    #     model:                  Sil\Bundle\StockBundle\Domain\Entity\Partner
+    #     repository:             Sil\Bundle\StockBundle\Doctrine\ORM\PartnerRepository
+    #     interfaces:
+    #       - Sil\Bundle\StockBundle\Domain\Entity\PartnerInterface
 
     sil.stock_batch:
       classes:

@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sil\Bundle\CRMBundle\Entity\Repository;
+namespace PlatformBundle\Controller;
 
-use Blast\Bundle\ResourceBundle\Doctrine\ORM\Repository\ResourceRepository;
+use Sil\Bundle\EcommerceBundle\Controller\ProductCRUDController;
 
-class OrganismRepository extends ResourceRepository
+class ProductController extends ProductCRUDController
 {
 }

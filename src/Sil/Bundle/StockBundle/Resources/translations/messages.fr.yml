@@ -231,7 +231,7 @@ sil:
                     available_qty: Quantité disponible
             form:
                 tab:
-                    general: Général
+                    general: Stocks
                 group:
                     general: ''
 
@@ -270,6 +270,10 @@ sil:
                     name: Libellé
 
             form:
+                tab:
+                    general: Général
+                group:
+                    general: ''
                 label:
                     warehouse: Entrepôt
                     code: Référence

@@ -54,6 +54,7 @@ parameters:
                             partner:
                                 associated_property: fulltextName
                                 admin_code: sil_crm.admin.organism
+
                             expectedAt: ~
                             completedAt: ~
                             state:
@@ -168,7 +169,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
-                    stockItem.name: ~
+                    stockItem.translations.name: ~
                     qtyValue: ~
                     qtyUom.name: ~
                     srcLocation.name: ~
@@ -365,12 +366,14 @@ parameters:
         Sil\Bundle\StockBundle\Domain\Entity\StockItemInterface:
 
             Sonata\AdminBundle\Form\FormMapper:
+
                 add:
                     sil.stock.stock_item.form.tab.general:
 
                         sil.stock.stock_item.form.group.general:
                             code: ~
-                            name: ~
+                            name:
+                                type: text
                             uom:
                                 choice_label: name
                             outputStrategy:
@@ -385,7 +388,7 @@ parameters:
                 titleTemplate: SilStockBundle:StockItemAdmin/Show:show_title.html.twig
                 forceTabs: true
                 add:
-                    sil.stock.stock_item.show.tab.general:
+                    sil.stock.stock_item.show.tab.stocks:
 
                         sil.stock.stock_item.show.group.general:
                             code: ~
@@ -404,7 +407,7 @@ parameters:
                                 mapped: false
                                 template: SilStockBundle:StockItemAdmin/Show:show_computed_qty.html.twig
 
-                    sil.stock.stock_item.show.tab.stocks:
+
 
                         sil.stock.stock_item.show.group.stocks:
                             locations:
@@ -419,22 +422,22 @@ parameters:
 
 
 
-            Sonata\AdminBundle\Datagrid\ListMapper:
-                add:
-                    code:
-                        identifier: true
-                    name: ~
-                    uom:
-                        associated_property: name
-                    outputStrategy:
-                        associated_property: name
+            # Sonata\AdminBundle\Datagrid\ListMapper:
+            #     add:
+            #         code:
+            #             identifier: true
+            #         name: ~
+            #         uom:
+            #             associated_property: name
+            #         outputStrategy:
+            #             associated_property: name
 
-            Sonata\AdminBundle\Datagrid\DatagridMapper:
-                add:
-                    name: ~
-                    code: ~
-                    uom.name: ~
-                    outputStrategy.name: ~
+            # Sonata\AdminBundle\Datagrid\DatagridMapper:
+            #     add:
+            #         name: ~
+            #         code: ~
+            #         uom.name: ~
+            #         outputStrategy.name: ~
 
     ##############
     # STOCK UNITS
@@ -450,7 +453,7 @@ parameters:
                             stockItem:
                                 choice_label: name
                                 attr:
-                                    disabled: disabled
+                                    #disabled: disabled
                                     class: inline-block
                                     width: 50
                             batch:

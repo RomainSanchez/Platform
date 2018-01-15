@@ -136,6 +136,7 @@ class OperationAdmin extends ResourceAdmin
 
         $group->add('partner', 'choice',
             [
+                'required'     => false,
                 'choices'      => $parters,
                 'choice_label' => 'fulltextName',
         ]);
@@ -281,8 +282,6 @@ class OperationAdmin extends ResourceAdmin
         $tr = $this->getConfigurationPool()->getContainer()->get('translator');
         $type = $tr->trans('sil.stock.operation_type.' . $operation->getType());
 
-        //return sprintf('[%s] %s', $operation->getCode(), $type);
-
-        return 'plop';
+        return sprintf('[%s] %s', $operation->getCode(), $type);
     }
 }
