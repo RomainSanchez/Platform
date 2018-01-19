@@ -7,6 +7,7 @@ services:
             - [setResourceRepository, ['@sil.repository.stock_item']]
             - [setStockItemQueries, ['@sil.domain_query.stock_item']]
             - [setLocationRepository, ['@sil.repository.stock_location']]
+            - [setStockUnitRepository, ['@sil.repository.stock_unit']]
             - [ setTemplates, [{show: SilStockBundle:StockItemAdmin:show.html.twig,edit: SilStockBundle:CRUD:edit.html.twig,list: SilStockBundle:CRUD:list.html.twig}]]
         tags:
             -

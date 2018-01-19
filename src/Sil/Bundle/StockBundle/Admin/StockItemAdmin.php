@@ -58,9 +58,9 @@ class StockItemAdmin extends ResourceAdmin
         return $this->getStockItemQueries()->getQtyByLocation($item, $location);
     }
 
-    public function getUnitsByLocation(StockItemInterface $item, Location $location)
+    public function getUnitsByItemAndLocation(StockItemInterface $item, Location $location)
     {
-        return $this->getStockItemQueries()->getUnitsByLocationAndGroupedByBatch($item, $location);
+        return $this->getStockUnitRepository()->findByStockItemAndLocation($item, $location);
     }
 
     public function getLocationsByItem(StockItemInterface $item)
@@ -93,9 +93,19 @@ class StockItemAdmin extends ResourceAdmin
         return $this->locationRepository;
     }
 
-    public function setLocationRepository(LocationRepositoryInterface $locationRepository)
+    public function setLocationRepository(LocationRepositoryInterface $stockUnitRepository)
     {
-        $this->locationRepository = $locationRepository;
+        $this->locationRepository = $stockUnitRepository;
+    }
+
+    public function getStockUnitRepository(): StockUnitRepositoryInterface
+    {
+        return $this->stockUnitRepository;
+    }
+
+    public function setStockUnitRepository(StockUnitRepositoryInterface $stockUnitRepository)
+    {
+        $this->stockUnitRepository = $stockUnitRepository;
     }
 
     public function getStockItemQueries(): StockItemQueriesInterface

@@ -164,6 +164,7 @@ class StockUnitRepository extends ResourceRepository implements StockUnitReposit
         $qb = $this->createQueryBuilder('su');
         $this->filterByStockItem($qb, $item, $batch);
         $this->filterByLocation($qb, $location);
+        $qb->orderBy('su.batch');
 
         return $qb->getQuery()->getResult();
     }

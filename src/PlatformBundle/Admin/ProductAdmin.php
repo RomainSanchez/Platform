@@ -20,6 +20,7 @@ use Symfony\Component\Form\FormEvents;
 use Blast\Bundle\ResourceBundle\Sonata\Admin\ResourceAdmin;
 use Sil\Bundle\StockBundle\Domain\Query\StockItemQueriesInterface;
 use Sil\Bundle\StockBundle\Domain\Repository\LocationRepositoryInterface;
+use Sil\Bundle\StockBundle\Domain\Repository\StockUnitRepositoryInterface;
 use Sil\Bundle\StockBundle\Domain\Entity\StockItemInterface;
 use Sil\Bundle\StockBundle\Domain\Entity\Location;
 use Sil\Bundle\StockBundle\Domain\Entity\LocationType;
@@ -240,9 +241,9 @@ class ProductAdmin extends ResourceAdmin
         return $this->getStockItemQueries()->getQtyByLocation($item, $location);
     }
 
-    public function getUnitsByLocation(StockItemInterface $item, Location $location)
+    public function getUnitsByItemAndLocation(StockItemInterface $item, Location $location)
     {
-        return $this->getStockItemQueries()->getUnitsByLocationAndGroupedByBatch($item, $location);
+        return $this->getStockUnitRepository()->findByStockItemAndLocation($item, $location);
     }
 
     public function getLocationsByItem(StockItemInterface $item)
@@ -275,9 +276,19 @@ class ProductAdmin extends ResourceAdmin
         return $this->locationRepository;
     }
 
-    public function setLocationRepository(LocationRepositoryInterface $locationRepository)
+    public function setLocationRepository(LocationRepositoryInterface $stockUnitRepository)
     {
-        $this->locationRepository = $locationRepository;
+        $this->locationRepository = $stockUnitRepository;
+    }
+
+    public function getStockUnitRepository(): StockUnitRepositoryInterface
+    {
+        return $this->stockUnitRepository;
+    }
+
+    public function setStockUnitRepository(StockUnitRepositoryInterface $stockUnitRepository)
+    {
+        $this->stockUnitRepository = $stockUnitRepository;
     }
 
     public function getStockItemQueries(): StockItemQueriesInterface

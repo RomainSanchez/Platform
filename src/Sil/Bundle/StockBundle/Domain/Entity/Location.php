@@ -382,4 +382,9 @@ class Location implements ResourceInterface
 
       return array_unique($items);
       } */
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }

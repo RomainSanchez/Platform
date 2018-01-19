@@ -12,6 +12,7 @@ parameters:
 
                         sil.stock.operation.form.group.description:
 
+                            # defined in OperationAdmin
                             dummy_1:
                                 type: hidden
                                 mapped: false
@@ -19,6 +20,7 @@ parameters:
 
                         sil.stock.operation.form.group.locations:
 
+                             # defined in OperationAdmin
                              dummy_2:
                                 type: hidden
                                 mapped: false
@@ -99,7 +101,39 @@ parameters:
                         template: SilStockBundle:Field:list_progress_state_field.html.twig
 
             Sonata\AdminBundle\Datagrid\DatagridMapper:
-                add: ~
+                remove:
+                    createdAt: ~
+                    updatedAt: ~
+                add:
+                    typeValue:
+                        type: doctrine_orm_string
+                        field_type: choice
+                        field_options:
+                            choices:
+                              sil.stock.operation_type_enum.shipping: shipping
+                              sil.stock.operation_type_enum.receipt: receipt
+                              sil.stock.operation_type_enum.internalTransfer: internalTransfer
+
+                    partner:
+                        associated_property: fulltextName
+                        admin_code: sil_crm.admin.organism
+                    expectedAt: ~
+                    completedAt: ~
+                    srcLocation:
+                        associated_property: name
+                    destLocation:
+                        associated_property: name
+                    stateValue:
+                        type: doctrine_orm_string
+                        field_type: choice
+                        field_options:
+                            choices:
+                              sil.stock.progress_state.draft: draft
+                              sil.stock.progress_state.confirmed: confirmed
+                              sil.stock.progress_state.partially_available: partially_available
+                              sil.stock.progress_state.available: available
+                              sil.stock.progress_state.done: done
+                              sil.stock.progress_state.cancel: cancel
 
 
 ##############
