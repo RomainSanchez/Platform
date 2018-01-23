@@ -38,7 +38,7 @@ Sil\Bundle\StockBundle\Domain\Entity\Movement:
             joinColumn:
                 name: operation_id
                 referencedColumnName: id
-                nullable: false
+                nullable: true
         srcLocation:
             targetEntity: Sil\Bundle\StockBundle\Domain\Entity\Location
             joinColumn:

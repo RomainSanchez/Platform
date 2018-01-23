@@ -283,6 +283,10 @@ sil:
                     name: Libellé
                     action: Actions
             show:
+                tab:
+                    general: Général
+                group:
+                    general: ''
                 label:
                     warehouse: Entrepôt
                     code: Référence

@@ -81,6 +81,7 @@ class MovementService implements MovementServiceInterface
         $mvt->setSrcLocation($srcLoc);
         $mvt->setDestLocation($destLoc);
 
+        // ?
         if (null == $batch) {
             $mvt->setBatch($mvt->getBatch());
         }

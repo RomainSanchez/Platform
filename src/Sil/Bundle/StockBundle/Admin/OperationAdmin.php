@@ -110,7 +110,7 @@ class OperationAdmin extends ResourceAdmin
                 'mapped'       => false,
                 'choices'      => OperationType::getTypes(),
                 'choice_label' => function ($label) {
-                    return 'sil.stock.operation_type.' . $label;
+                    return 'sil.stock.operation_type_enum.' . $label;
                 },
                 'choice_value' => 'value',
                 'data'         => $type,
@@ -280,7 +280,7 @@ class OperationAdmin extends ResourceAdmin
     public function toString($operation)
     {
         $tr = $this->getConfigurationPool()->getContainer()->get('translator');
-        $type = $tr->trans('sil.stock.operation_type.' . $operation->getType());
+        $type = $tr->trans('sil.stock.operation_type_enum.' . $operation->getType());
 
         return sprintf('[%s] %s', $operation->getCode(), $type);
     }

@@ -25,4 +25,6 @@ interface LocationRepositoryInterface
 
     public function findByOwnedItem(StockItemInterface $item,
         ?string $locationType = null): array;
+
+    public function findVirtualLocations(): array;
 }

@@ -66,6 +66,31 @@ class LocationType
         return $this->value;
     }
 
+    public function isInternal(): bool
+    {
+        return $this->value == self::INTERNAL;
+    }
+
+    public function isSupplier(): bool
+    {
+        return $this->value == self::SUPPLIER;
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->value == self::CUSTOMER;
+    }
+
+    public function isVirtual(): bool
+    {
+        return $this->value == self::VIRTUAL;
+    }
+
+    public function isScrap(): bool
+    {
+        return $this->value == self::SCRAP;
+    }
+
     public function getTypes()
     {
         return [

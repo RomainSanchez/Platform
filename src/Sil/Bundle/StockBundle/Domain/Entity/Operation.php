@@ -75,8 +75,8 @@ class Operation implements ProgressStateAwareInterface, ResourceInterface
      */
     protected $movements;
 
-    public static function createDefault(string $code, Location $srcLocation,
-        Location $destLocation, OperationType $type)
+    public static function createDefault(string $code, OperationType $type, ?Location $srcLocation = null,
+        ?Location $destLocation = null)
     {
         $o = new self();
         $o->code = $code;

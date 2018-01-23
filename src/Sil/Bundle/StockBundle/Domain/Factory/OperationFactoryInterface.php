@@ -24,6 +24,6 @@ interface OperationFactoryInterface
     /**
      * @return Operation
      */
-    public function createDraft(OperationType $type, Location $srcLocation,
-        Location $destLocation): Operation;
+    public function createDraft(OperationType $type, ?Location $srcLocation,
+        ?Location $destLocation): Operation;
 }

@@ -38,10 +38,10 @@ class OperationFactory implements OperationFactoryInterface
     /**
      * @return Operation
      */
-    public function createDraft(OperationType $type, Location $srcLocation, Location $destLocation): Operation
+    public function createDraft(OperationType $type, ?Location $srcLocation = null, ?Location $destLocation = null): Operation
     {
         $code = $this->codeGenerator->generate();
 
-        return Operation::createDefault($code, $srcLocation, $destLocation, $type);
+        return Operation::createDefault($code, $type, $srcLocation, $destLocation);
     }
 }

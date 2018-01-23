@@ -55,7 +55,7 @@ class OperationService implements OperationServiceInterface
     /**
      * @return Operation
      */
-    public function createDraft(OperationType $type, Location $srcLocation, Location $destLocation): Operation
+    public function createDraft(OperationType $type, ?Location $srcLocation = null, ?Location $destLocation = null): Operation
     {
         $op = $this->operationFactory->createDraft($type, $srcLocation, $destLocation);
         $this->operationRepository->add($op);

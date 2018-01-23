@@ -385,6 +385,6 @@ class Location implements ResourceInterface
 
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

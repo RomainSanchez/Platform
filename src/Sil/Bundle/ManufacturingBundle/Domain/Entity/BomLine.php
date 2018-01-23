@@ -13,6 +13,8 @@ namespace Sil\Bundle\ManufacturingBundle\Domain\Entity;
 use Blast\Component\Resource\Model\ResourceInterface;
 use Blast\Bundle\BaseEntitiesBundle\Entity\Traits\Guidable;
 use Sil\Bundle\StockBundle\Domain\Entity\StockItemInterface;
+use Sil\Bundle\StockBundle\Domain\Entity\BatchInterface;
+use Sil\Bundle\StockBundle\Domain\Entity\Location;
 use Sil\Bundle\UomBundle\Entity\Uom;
 use Sil\Component\Uom\Model\UomQty;
 
@@ -42,6 +44,16 @@ class BomLine implements ResourceInterface
      * @var Uom
      */
     protected $qtyUom;
+
+    /**
+     * @var Location
+     */
+    protected $srcLocation;
+
+    /**
+     * @var BatchInterface
+     */
+    protected $batch;
 
     /**
      * @return Bom
@@ -94,5 +106,37 @@ class BomLine implements ResourceInterface
     {
         $this->qtyValue = $qty->getValue();
         $this->qtyUom = $qty->getUom();
+    }
+
+    /**
+     * @return Location
+     */
+    public function getSrcLocation(): ?Location
+    {
+        return $this->srcLocation;
+    }
+
+    /**
+     * @param Location $srcLocation
+     */
+    public function setSrcLocation(Location $srcLocation): void
+    {
+        $this->srcLocation = $srcLocation;
+    }
+
+    /**
+     * @return BatchInterface|null
+     */
+    public function getBatch(): ?BatchInterface
+    {
+        return $this->batch;
+    }
+
+    /**
+     * @param BatchInterface|null $batch
+     */
+    public function setBatch(?BatchInterface $batch): void
+    {
+        $this->batch = $batch;
     }
 }

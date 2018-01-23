@@ -44,6 +44,15 @@ class LocationRepository extends NestedTreeResourceRepository implements Locatio
         return $qb->getQuery()->getResult();
     }
 
+    public function findVirtualLocations(): array
+    {
+        $qb = $this->createQueryBuilder('l')
+          ->where('l.typeValue = :type')
+          ->setParameter('type', LocationType::VIRTUAL);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findCustomerLocations(): array
     {
         $qb = $this->createQueryBuilder('l')
